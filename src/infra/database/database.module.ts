@@ -5,8 +5,8 @@ import { PrismaUserRepository } from './prisma/repositories/prismaUserRepository
 import { HttpModule } from '@nestjs/axios';
 
 @Module({
+  imports: [HttpModule],
   providers: [
-    HttpModule,
     PrismaService,
     {
       provide: UserRepository,
