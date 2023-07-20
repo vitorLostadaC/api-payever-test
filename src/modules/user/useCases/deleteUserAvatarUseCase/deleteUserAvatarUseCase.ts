@@ -4,6 +4,7 @@ import { UserRepository } from '../../repositories/userRepository';
 import * as fs from 'fs';
 import { UserNotFoundException } from '../../exceptions/userNotFoundException';
 import { UserHasNoAvatarException } from '../../exceptions/userHasNoAvatarException';
+import { InvalidIdException } from '../../exceptions/invalidIdException';
 
 interface DeleteUserAvatarInterface {
   id: string;
@@ -14,12 +15,11 @@ export class DeleteUserAvatarUseCase {
   constructor(private userRepository: UserRepository) {}
 
   async execute({ id }: DeleteUserAvatarInterface) {
-    if (!BSON.ObjectId.isValid(id))
-      throw new HttpException('Invalid id', HttpStatus.BAD_REQUEST);
+    if (!BSON.ObjectId.isValid(id)) throw new InvalidIdException();
 
     const currentUser = await this.userRepository.findById(id);
 
-    if (!currentUser.id) throw new UserNotFoundException();
+    if (!currentUser?.id) throw new UserNotFoundException();
 
     if (!currentUser.avatar) throw new UserHasNoAvatarException();
 
