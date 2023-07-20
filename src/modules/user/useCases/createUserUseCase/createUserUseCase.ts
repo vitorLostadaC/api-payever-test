@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { User } from '../../entitie/User';
 import { UserRepository } from '../../repositories/userRepository';
 type CreateUserRequest = {
@@ -7,6 +8,7 @@ type CreateUserRequest = {
   avatar?: string; //TODO create after
 };
 
+@Injectable()
 export class CreateUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
