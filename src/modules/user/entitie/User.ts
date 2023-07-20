@@ -1,7 +1,7 @@
 import { ObjectId } from 'bson';
 
 interface UserProps {
-  name: string;
+  email: string;
   first_name: string;
   last_name: string;
   avatar?: string;
@@ -20,12 +20,12 @@ export class User {
     return this._id;
   }
 
-  get name(): string {
-    return this.props.name;
+  get email(): string {
+    return this.props.email;
   }
 
-  set name(name: string) {
-    this.name = name;
+  set email(email: string) {
+    this.email = email;
   }
 
   get first_name(): string {

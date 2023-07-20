@@ -8,12 +8,12 @@ export class UsersController {
 
   @Post()
   async create(@Body() body: CreateUserBody) {
-    const { first_name, last_name, name } = body;
+    const { first_name, last_name, email } = body;
 
     const user = await this.createUserUseCase.execute({
       first_name,
       last_name,
-      name,
+      email,
     });
 
     return user;
