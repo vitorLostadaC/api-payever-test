@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './infra/database/database.module';
 import { UserModule } from './infra/modules/user/user.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { RabbitMQService } from './infra/rabbitMq/rabbitMq.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { MailerModule } from '@nestjs-modules/mailer';
     }),
   ],
   controllers: [],
-  providers: [],
+  providers: [RabbitMQService],
 })
 export class AppModule {}

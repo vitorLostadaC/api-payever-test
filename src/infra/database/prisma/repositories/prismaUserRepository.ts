@@ -9,7 +9,7 @@ import { ReqresUserMapper } from '../../reqres/mappers/reqresUserMapper';
 
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
-  private readonly logger = new Logger(PrismaService.name);
+  private readonly logger = new Logger(PrismaUserRepository.name);
 
   constructor(
     private prisma: PrismaService,

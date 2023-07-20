@@ -6,6 +6,7 @@ import { UsersController } from './contollers/users.controller';
 import { FindUserUseCase } from 'src/modules/user/useCases/findUserUseCase/findUserUseCaser';
 import { GetUserAvatarUseCase } from 'src/modules/user/useCases/getUserAvatarUseCase/getUserAvatarUseCase';
 import { DeleteUserAvatarUseCase } from 'src/modules/user/useCases/deleteUserAvatarUseCase/deleteUserAvatarUseCase';
+import { RabbitMQService } from 'src/infra/rabbitMq/rabbitMq.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -14,6 +15,7 @@ import { DeleteUserAvatarUseCase } from 'src/modules/user/useCases/deleteUserAva
     FindUserUseCase,
     GetUserAvatarUseCase,
     DeleteUserAvatarUseCase,
+    RabbitMQService,
   ],
   controllers: [UserController, UsersController],
 })

@@ -2,19 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { User } from '../../entitie/User';
 import { UserRepository } from '../../repositories/userRepository';
 import { MailerService } from '@nestjs-modules/mailer';
+import { RabbitMQService } from 'src/infra/rabbitMq/rabbitMq.service';
 
-type CreateUserRequest = {
+interface CreateUserRequest {
   email: string;
   first_name: string;
   last_name: string;
   avatar?: string;
-};
+}
 
 @Injectable()
 export class CreateUserUseCase {
   constructor(
     private userRepository: UserRepository,
     private mailerService: MailerService,
+    private rabbitMQService: RabbitMQService,
   ) {}
 
   async execute({ first_name, last_name, email, avatar }: CreateUserRequest) {
@@ -32,6 +34,8 @@ export class CreateUserUseCase {
       subject: 'Welcome to our app!',
       context: { name: first_name },
     });
+
+    await this.rabbitMQService.sendMessage({ userId: user.id });
 
     return user;
   }
