@@ -17,6 +17,9 @@ export class GetUserAvatarUseCase {
 
     const currentUser = await this.userRepository.findById(id);
 
+    if (!currentUser.id)
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
     const avatarPath = `${process.cwd()}/uploads/${currentUser.avatar}`;
     const avatarBuffer = fs.readFileSync(avatarPath);
     const b64Avatar = Buffer.from(avatarBuffer).toString('base64');
