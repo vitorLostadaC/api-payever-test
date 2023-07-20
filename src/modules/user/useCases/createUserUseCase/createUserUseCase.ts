@@ -21,7 +21,7 @@ export class CreateUserUseCase {
   ) {}
 
   async execute({ first_name, last_name, email, avatar }: CreateUserRequest) {
-    const userWithSomeEmail = this.userRepository.findByEmail(email);
+    const userWithSomeEmail = await this.userRepository.findByEmail(email);
 
     if (userWithSomeEmail) throw new EmailAlredyRegisterException();
 
