@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserRepository } from '../../repositories/userRepository';
+import { UserNotFoundException } from '../../exceptions/userNotFoundException';
 
 interface FindUserRequest {
   id: string;
@@ -12,7 +13,7 @@ export class FindUserUseCase {
   async execute({ id }: FindUserRequest) {
     const user = await this.userRepository.findByIdReqres(id);
 
-    if (!user) throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    if (!user) throw new UserNotFoundException();
 
     return user;
   }

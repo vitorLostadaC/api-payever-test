@@ -2,6 +2,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { BSON } from 'bson';
 import { UserRepository } from '../../repositories/userRepository';
 import * as fs from 'fs';
+import { UserNotFoundException } from '../../exceptions/userNotFoundException';
+import { UserHasNoAvatarException } from '../../exceptions/userHasNoAvatarException';
 
 interface DeleteUserAvatarInterface {
   id: string;
@@ -17,11 +19,9 @@ export class DeleteUserAvatarUseCase {
 
     const currentUser = await this.userRepository.findById(id);
 
-    if (!currentUser.id)
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    if (!currentUser.id) throw new UserNotFoundException();
 
-    if (!currentUser.avatar)
-      throw new HttpException(`User has no avatar`, HttpStatus.BAD_REQUEST);
+    if (!currentUser.avatar) throw new UserHasNoAvatarException();
 
     const avatarPath = `${process.cwd()}/uploads/${currentUser.avatar}`;
     await fs.promises.unlink(avatarPath);

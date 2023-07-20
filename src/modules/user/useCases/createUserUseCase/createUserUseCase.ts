@@ -3,6 +3,7 @@ import { User } from '../../entitie/User';
 import { UserRepository } from '../../repositories/userRepository';
 import { MailerService } from '@nestjs-modules/mailer';
 import { RabbitMQService } from 'src/infra/rabbitMq/rabbitMq.service';
+import { EmailAlredyRegisterException } from '../../exceptions/emailAlredyRegisterException';
 
 interface CreateUserRequest {
   email: string;
@@ -20,6 +21,10 @@ export class CreateUserUseCase {
   ) {}
 
   async execute({ first_name, last_name, email, avatar }: CreateUserRequest) {
+    const userWithSomeEmail = this.userRepository.findByEmail(email);
+
+    if (userWithSomeEmail) throw new EmailAlredyRegisterException();
+
     const user = new User({
       first_name,
       last_name,
