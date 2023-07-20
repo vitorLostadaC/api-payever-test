@@ -21,7 +21,7 @@ export class PrismaUserMapper {
         email,
         avatar,
       },
-      id.toString() as unknown as ObjectId,
+      new ObjectId(id.toString()),
     );
   }
 }

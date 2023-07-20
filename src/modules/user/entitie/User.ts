@@ -25,7 +25,7 @@ export class User {
   }
 
   set email(email: string) {
-    this.email = email;
+    this.props.email = email;
   }
 
   get first_name(): string {
@@ -33,7 +33,7 @@ export class User {
   }
 
   set first_name(first_name: string) {
-    this.first_name = first_name;
+    this.props.first_name = first_name;
   }
 
   get last_name(): string {
@@ -41,7 +41,7 @@ export class User {
   }
 
   set last_name(last_name: string) {
-    this.last_name = last_name;
+    this.props.last_name = last_name;
   }
 
   get avatar(): string {
@@ -49,6 +49,6 @@ export class User {
   }
 
   set avatar(avatar: string) {
-    this.avatar = avatar;
+    this.props.avatar = avatar;
   }
 }
