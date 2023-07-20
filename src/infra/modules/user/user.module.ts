@@ -4,10 +4,11 @@ import { CreateUserUseCase } from 'src/modules/user/useCases/createUserUseCase/c
 import { UserController } from './contollers/user.controller';
 import { UsersController } from './contollers/users.controller';
 import { FindUserUseCase } from 'src/modules/user/useCases/findUserUseCase/findUserUseCaser';
+import { GetUserAvatarUseCase } from 'src/modules/user/useCases/getUserAvatarUseCase/getUserAvatarUseCase';
 
 @Module({
   imports: [DatabaseModule],
-  providers: [CreateUserUseCase, FindUserUseCase],
+  providers: [CreateUserUseCase, FindUserUseCase, GetUserAvatarUseCase],
   controllers: [UserController, UsersController],
 })
 export class UserModule {}

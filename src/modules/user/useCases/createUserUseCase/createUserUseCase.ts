@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '../../entitie/User';
 import { UserRepository } from '../../repositories/userRepository';
+
 type CreateUserRequest = {
   email: string;
   first_name: string;
   last_name: string;
-  avatar?: string; //TODO create after
+  avatar?: string;
 };
 
 @Injectable()
