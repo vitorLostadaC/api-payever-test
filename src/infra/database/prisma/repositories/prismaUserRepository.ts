@@ -24,7 +24,7 @@ export class PrismaUserRepository implements UserRepository {
     });
   }
 
-  async findById(userId: string): Promise<User | null> {
+  async findByIdReqres(userId: string): Promise<User | null> {
     // I don't like to do it this way, I always like to separate it into different repositories but since it doesn't fit in a different module, I preferred to leave it here
 
     try {

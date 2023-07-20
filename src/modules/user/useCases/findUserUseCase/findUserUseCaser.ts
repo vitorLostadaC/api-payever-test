@@ -10,7 +10,7 @@ export class FindUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
   async execute({ id }: FindUserRequest) {
-    const user = await this.userRepository.findById(id);
+    const user = await this.userRepository.findByIdReqres(id);
 
     if (!user) throw new HttpException('Not found', HttpStatus.NOT_FOUND);
 
