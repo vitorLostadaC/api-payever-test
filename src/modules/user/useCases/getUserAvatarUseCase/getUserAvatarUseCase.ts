@@ -1,9 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../repositories/userRepository';
 import { BSON } from 'bson';
 import * as fs from 'fs';
 import { UserNotFoundException } from '../../exceptions/userNotFoundException';
 import { InvalidIdException } from '../../exceptions/invalidIdException';
+import { UserHasNoAvatarException } from '../../exceptions/userHasNoAvatarException';
 
 interface GetUserAvatarRequest {
   id: string;
@@ -18,7 +19,9 @@ export class GetUserAvatarUseCase {
 
     const currentUser = await this.userRepository.findById(id);
 
-    if (!currentUser.id) throw new UserNotFoundException();
+    if (!currentUser?.id) throw new UserNotFoundException();
+
+    if (!currentUser.avatar) throw new UserHasNoAvatarException();
 
     const avatarPath = `${process.cwd()}/uploads/${currentUser.avatar}`;
     const avatarBuffer = fs.readFileSync(avatarPath);
