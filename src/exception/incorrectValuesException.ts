@@ -4,7 +4,7 @@ import { AppException } from './appException';
 export class IncorrectValuesException extends AppException {
   constructor(fields: { [key: string]: string }) {
     super({
-      message: 'Dados Inválidos',
+      message: 'Invalid data',
       status: HttpStatus.BAD_REQUEST,
       fields,
     });
