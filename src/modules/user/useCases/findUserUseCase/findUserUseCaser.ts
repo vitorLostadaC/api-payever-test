@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../repositories/userRepository';
 import { UserNotFoundException } from '../../exceptions/userNotFoundException';
 
