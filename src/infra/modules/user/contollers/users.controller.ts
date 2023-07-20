@@ -11,6 +11,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuidV4 } from 'uuid';
+import { UserViewModel } from '../viewModels/userViewModel';
 
 @Controller('users')
 export class UsersController {
@@ -42,6 +43,6 @@ export class UsersController {
       avatar: file.filename,
     });
 
-    return user;
+    return UserViewModel.toHTTP(user);
   }
 }
