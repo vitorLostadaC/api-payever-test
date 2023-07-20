@@ -1,5 +1,5 @@
 import { User } from '../../entitie/User';
-import { UserRepository } from '../../repositories/UserRepository';
+import { UserRepository } from '../../repositories/userRepository';
 type CreateUserRequest = {
   name: string;
   first_name: string;
